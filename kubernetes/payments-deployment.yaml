@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-deployment
+  namespace: micropay
+  labels:
+    app: payments-service
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payments-service
+  template:
+    metadata:
+      labels:
+        app: payments-service
+        version: v1
+    spec:
+      containers:
+      - name: payments-service
+        image: micropay/payments:latest
+        ports:
+        - containerPort: 3002
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: NODE_ENV
+        - name: PAYMENTS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: PAYMENTS_PORT
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: JWT_SECRET
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-service
+  namespace: micropay
+  labels:
+    app: payments-service
+spec:
+  selector:
+    app: payments-service
+  ports:
+  - port: 3002
+    targetPort: 3002
+    protocol: TCP
+  type: ClusterIP

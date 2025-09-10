@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: micropay-config
+  namespace: micropay
+data:
+  NODE_ENV: "production"
+  JWT_SECRET: "micropay-secret-key-2024-k8s"
+  API_GATEWAY_PORT: "3000"
+  USERS_PORT: "3001"
+  PAYMENTS_PORT: "3002"
+  ORDERS_PORT: "3003"
+  NOTIFICATIONS_PORT: "3004"

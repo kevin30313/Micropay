@@ -1,0 +1,5 @@
+{"level":"info","message":"Users service running on port 3001","service":"micropay","timestamp":"2025-09-10T02:04:15.233Z"}
+{"level":"info","message":"API Gateway running on port 3000","service":"micropay","timestamp":"2025-09-10T02:04:15.335Z"}
+{"level":"info","message":"Notifications service running on port 3004","service":"micropay","timestamp":"2025-09-10T02:04:15.372Z"}
+{"level":"info","message":"Orders service running on port 3003","service":"micropay","timestamp":"2025-09-10T02:04:15.438Z"}
+{"level":"info","message":"Payments service running on port 3002","service":"micropay","timestamp":"2025-09-10T02:04:15.651Z"}

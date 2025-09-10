@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: micropay-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - API_GATEWAY_PORT=3000
+    depends_on:
+      - users-service
+      - payments-service
+      - orders-service
+      - notifications-service
+    networks:
+      - micropay-network
+    restart: unless-stopped
+
+  users-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.users
+    container_name: micropay-users
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - USERS_PORT=3001
+    networks:
+      - micropay-network
+    restart: unless-stopped
+
+  payments-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.payments
+    container_name: micropay-payments
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - PAYMENTS_PORT=3002
+    networks:
+      - micropay-network
+    restart: unless-stopped
+
+  orders-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.orders
+    container_name: micropay-orders
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - ORDERS_PORT=3003
+    networks:
+      - micropay-network
+    restart: unless-stopped
+
+  notifications-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.notifications
+    container_name: micropay-notifications
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=production
+      - NOTIFICATIONS_PORT=3004
+    networks:
+      - micropay-network
+    restart: unless-stopped
+
+networks:
+  micropay-network:
+    driver: bridge
+
+volumes:
+  app-logs:

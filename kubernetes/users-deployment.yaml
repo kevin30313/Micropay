@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+  namespace: micropay
+  labels:
+    app: users-service
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users-service
+  template:
+    metadata:
+      labels:
+        app: users-service
+        version: v1
+    spec:
+      containers:
+      - name: users-service
+        image: micropay/users:latest
+        ports:
+        - containerPort: 3001
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: NODE_ENV
+        - name: USERS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: USERS_PORT
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: micropay-config
+              key: JWT_SECRET
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+  namespace: micropay
+  labels:
+    app: users-service
+spec:
+  selector:
+    app: users-service
+  ports:
+  - port: 3001
+    targetPort: 3001
+    protocol: TCP
+  type: ClusterIP
