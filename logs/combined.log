@@ -8,3 +8,8 @@
 {"level":"info","message":"Orders service running on port 3003","service":"micropay","timestamp":"2025-09-11T02:43:10.050Z"}
 {"level":"info","message":"API Gateway running on port 3000","service":"micropay","timestamp":"2025-09-11T02:43:10.073Z"}
 {"level":"info","message":"Payments service running on port 3002","service":"micropay","timestamp":"2025-09-11T02:43:10.234Z"}
+{"level":"info","message":"Notifications service running on port 3004","service":"micropay","timestamp":"2025-09-11T02:52:28.745Z"}
+{"level":"info","message":"Orders service running on port 3003","service":"micropay","timestamp":"2025-09-11T02:52:28.864Z"}
+{"level":"info","message":"Users service running on port 3001","service":"micropay","timestamp":"2025-09-11T02:52:28.887Z"}
+{"level":"info","message":"API Gateway running on port 3000","service":"micropay","timestamp":"2025-09-11T02:52:28.954Z"}
+{"level":"info","message":"Payments service running on port 3002","service":"micropay","timestamp":"2025-09-11T02:52:29.099Z"}
