@@ -32,7 +32,7 @@
 ```bash
 # Clonar el proyecto
 git clone <repository-link>
-cd micropay-microservices
+cd src/services
 
 # Instalar dependencias
 npm install
