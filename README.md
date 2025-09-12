@@ -31,7 +31,7 @@
 ### Instalación
 ```bash
 # Clonar el proyecto
-git clone <rep>
+git clone <repository-link>
 cd micropay-microservices
 
 # Instalar dependencias
