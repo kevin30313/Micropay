@@ -441,4 +441,4 @@ output "rds_orders_endpoint" {
 output "api_gateway_url" {
   description = "API Gateway endpoint"
   value       = aws_apigatewayv2_api.api_gateway.api_endpoint
-}
+} 
