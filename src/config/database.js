@@ -16,8 +16,10 @@ class InMemoryDatabase {
     return user;
   }
 
+  // CAMBIO: Se asegura de devolver 'null' si el usuario no existe.
   getUserById(id) {
-    return this.users.get(id);
+    const user = this.users.get(id);
+    return user || null; 
   }
 
   getUserByEmail(email) {
@@ -41,8 +43,10 @@ class InMemoryDatabase {
     return null;
   }
 
+  // CAMBIO: Se asegura de devolver el resultado booleano de la eliminación.
   deleteUser(id) {
-    return this.users.delete(id);
+    const deleted = this.users.delete(id);
+    return deleted;
   }
 
   // Payments operations
@@ -55,8 +59,10 @@ class InMemoryDatabase {
     return payment;
   }
 
+  // CAMBIO: Se asegura de devolver 'null' si el pago no existe.
   getPaymentById(id) {
-    return this.payments.get(id);
+    const payment = this.payments.get(id);
+    return payment || null;
   }
 
   getAllPayments() {
@@ -83,8 +89,10 @@ class InMemoryDatabase {
     return order;
   }
 
+  // CAMBIO: Se asegura de devolver 'null' si la orden no existe.
   getOrderById(id) {
-    return this.orders.get(id);
+    const order = this.orders.get(id);
+    return order || null;
   }
 
   getAllOrders() {
@@ -101,8 +109,10 @@ class InMemoryDatabase {
     return null;
   }
 
+  // CAMBIO: Se asegura de devolver el resultado booleano de la eliminación.
   deleteOrder(id) {
-    return this.orders.delete(id);
+    const deleted = this.orders.delete(id);
+    return deleted;
   }
 
   // Notifications operations
@@ -116,7 +126,8 @@ class InMemoryDatabase {
   }
 
   getNotificationById(id) {
-    return this.notifications.get(id);
+    const notification = this.notifications.get(id);
+    return notification || null;
   }
 
   getAllNotifications() {
